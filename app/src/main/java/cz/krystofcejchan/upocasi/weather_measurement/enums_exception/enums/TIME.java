@@ -2,6 +2,7 @@ package cz.krystofcejchan.upocasi.weather_measurement.enums_exception.enums;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -14,39 +15,39 @@ public enum TIME {
     /**
      * 3:00 a.m.
      */
-    AM_3,
+    AM_3(LocalTime.of(3, 0)),
     /**
      * 6:00 a.m.
      */
-    AM_6,
+    AM_6(LocalTime.of(6, 0)),
     /**
      * 9:00 a.m.
      */
-    AM_9,
+    AM_9(LocalTime.of(9, 0)),
     /**
      * noon
      */
-    AM_12,
+    AM_12(LocalTime.NOON),
     /**
      * 3:00 p.m.
      */
-    PM_3,
+    PM_3(LocalTime.of(15, 0)),
     /**
      * 6:00 p.m.
      */
-    PM_6,
+    PM_6(LocalTime.of(18, 0)),
     /**
      * 9:00 p.m.
      */
-    PM_9,
+    PM_9(LocalTime.of(21, 0)),
     /**
      * midnight
      */
-    PM_12,
+    PM_12(LocalTime.MIDNIGHT),
     /**
      * all times
      */
-    ALL;
+    ALL(LocalTime.MIN);
 
     /**
      * case PM_12 -> 0;
@@ -94,5 +95,15 @@ public enum TIME {
      */
     public static java.util.List<TIME> getAllEnumsExcept(@NotNull TIME time) {
         return Arrays.stream(values()).filter(it -> !it.equals(time)).collect(Collectors.toList());
+    }
+
+    final LocalTime time;
+
+    TIME(LocalTime time) {
+        this.time = time;
+    }
+
+    public LocalTime getTime() {
+        return time;
     }
 }

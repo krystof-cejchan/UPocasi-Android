@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Locale;
+import java.util.Objects;
 
 import cz.krystofcejchan.upocasi.weather_measurement.UtilityClass;
 import cz.krystofcejchan.upocasi.weather_measurement.enums_exception.exceptions.CouldNotFindLocation;
@@ -66,7 +67,7 @@ public final class CurrentCondition {
     public CurrentCondition(@NotNull String location) throws CouldNotFindLocation, JSONException {
         this.location = location;
         //main json object for current condition
-        JSONObject current_condition = UtilityClass.getJson(location).getJSONArray("current_condition").getJSONObject(0);
+        JSONObject current_condition = Objects.requireNonNull(UtilityClass.getJson(location)).getJSONArray("current_condition").getJSONObject(0);
 
 
         //calculating date and time

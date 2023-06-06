@@ -1,17 +1,16 @@
 package cz.krystofcejchan.upocasi.weather_measurement;
 
-import com.google.common.net.UrlEscapers;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
-import org.apache.commons.io.IOUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URI;
+import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -21,8 +20,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import cz.krystofcejchan.upocasi.weather_measurement.enums_exception.exceptions.CannotCreateInstance;
-import cz.krystofcejchan.upocasi.weather_measurement.enums_exception.exceptions.CouldNotFindLocation;
-import cz.krystofcejchan.upocasi.weather_measurement.enums_exception.exceptions.WeatherDataNotAccessible;
 import cz.krystofcejchan.upocasi.weather_measurement.weather_objects.subparts.forecast.days.hour.ForecastAtHour;
 
 /**
@@ -89,17 +86,19 @@ public class UtilityClass {
         return LocalDate.of(year_month_day[0], year_month_day[1], year_month_day[2]);
     }
 
-    public static JSONObject getJson(@NotNull String location) throws CouldNotFindLocation {
-        try {
-            String jsonSource = IOUtils.toString(
-                    new URL(UrlEscapers
-                            .urlFragmentEscaper().escape("https://wttr.in/" + location + "?format=j1")),
-                    StandardCharsets.UTF_8);
-            return new JSONObject(jsonSource);
+    public static JSONObject getJson(@NotNull String location) {
+        StringBuilder builder = new StringBuilder();
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new URL("https://wttr.in/" + location + "?format=j1").openStream(), UTF_8))) {
+            String str;
+            while ((str = bufferedReader.readLine()) != null) {
+                builder.append(str);
+            }
+            return new JSONObject(builder.toString());
         } catch (IOException | JSONException e) {
-            throw new CouldNotFindLocation("It seems the location you entered could not be found");
+            e.printStackTrace();
         }
 
+        return null;
     }
 
     /**
@@ -155,13 +154,8 @@ public class UtilityClass {
          * @return text from webpage
          */
         public static String getTextFromWebpage(@NotNull String webUrl) {
-            try {
-                if (!isLink(webUrl)) return null;
-                webUrl = webUrl.replace(" ", "%20");
-                return IOUtils.toString(URI.create(webUrl), StandardCharsets.UTF_8);
-            } catch (IOException e) {
-                throw new WeatherDataNotAccessible("Weather data could not be accessed; try again later");
-            }
+            webUrl = webUrl.replace(" ", "%20");
+            return webUrl;
         }
     }
 

@@ -9,4 +9,14 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
+    <string-array name="temp_units">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+    </string-array>
+    <string-array name="temp_values">
+        <item>celsius</item>
+        <item>fahrenheit</item>
+    </string-array>
+
 </resources>

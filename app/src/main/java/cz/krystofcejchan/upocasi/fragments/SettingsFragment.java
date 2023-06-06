@@ -1,8 +1,10 @@
-package cz.krystofcejchan.upocasi;
+package cz.krystofcejchan.upocasi.fragments;
 
 import android.os.Bundle;
 
 import androidx.preference.PreferenceFragmentCompat;
+
+import cz.krystofcejchan.upocasi.R;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 

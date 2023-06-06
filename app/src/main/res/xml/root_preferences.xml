@@ -1,35 +1,25 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:icon="@drawable/settings">
 
     <PreferenceCategory app:title="Location">
 
         <EditTextPreference
+            app:defaultValue="Olomouc"
             app:key="location"
             app:title="Default location"
             app:useSimpleSummaryProvider="true" />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Default unit of temperature">
         <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
-            app:useSimpleSummaryProvider="true" />
-
+            android:defaultValue="celsius"
+            android:entries="@array/temp_units"
+            android:entryValues="@array/temp_values"
+            android:key="temp_unit"
+            android:title="Temperature Unit" />
     </PreferenceCategory>
 
-    <PreferenceCategory>
-
-        <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="@string/sync_title" />
-
-        <SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
-
-    </PreferenceCategory>
 
 </PreferenceScreen>
