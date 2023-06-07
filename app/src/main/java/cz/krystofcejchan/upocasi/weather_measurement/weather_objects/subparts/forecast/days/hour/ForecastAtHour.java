@@ -4,7 +4,6 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import cz.krystofcejchan.upocasi.weather_measurement.enums_exception.enums.DAY;
 import cz.krystofcejchan.upocasi.weather_measurement.enums_exception.enums.TIME;
 import cz.krystofcejchan.upocasi.weather_measurement.weather_objects.MethodRefPrint;
