@@ -3,7 +3,7 @@ package cz.krystofcejchan.upocasi.weather_measurement;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import org.json.JSONException;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;

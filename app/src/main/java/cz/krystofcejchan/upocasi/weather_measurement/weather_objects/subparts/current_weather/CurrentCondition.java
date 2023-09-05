@@ -67,7 +67,7 @@ public final class CurrentCondition {
     public CurrentCondition(@NotNull String location) throws CouldNotFindLocation, JSONException {
         this.location = location;
         //main json object for current condition
-        JSONObject current_condition = Objects.requireNonNull(UtilityClass.getJson(location)).getJSONArray("current_condition").getJSONObject(0);
+        JSONObject current_condition = Objects.requireNonNull(UtilityClass.Companion.getJson(location)).getJSONArray("current_condition").getJSONObject(0);
 
 
         //calculating date and time
@@ -76,7 +76,7 @@ public final class CurrentCondition {
                 .trim()
                 .toUpperCase(Locale.ROOT));
 
-        localObsDateTime = UtilityClass.stringToDateTime(locObsDateT);
+        localObsDateTime = UtilityClass.Companion.stringToDateTime(locObsDateT);
 
         // -----  ------------ ----------- -------------
 
@@ -85,7 +85,7 @@ public final class CurrentCondition {
         feelsLikeF = current_condition.getInt("FeelsLikeF");
         cloudCover = current_condition.getInt("cloudcover");
         humidity = current_condition.getInt("humidity");
-        observationTime = UtilityClass.stringToLocalTime(obsT);
+        observationTime = UtilityClass.Companion.stringToLocalTime(obsT);
         precipInches = current_condition.getDouble("precipInches");
         precipMM = current_condition.getDouble("precipMM");
         pressure = current_condition.getInt("pressure");

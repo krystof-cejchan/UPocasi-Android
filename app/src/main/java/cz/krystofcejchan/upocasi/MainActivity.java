@@ -15,6 +15,7 @@ import cz.krystofcejchan.upocasi.fragments.HomeFragment;
 import cz.krystofcejchan.upocasi.fragments.SettingsFragment;
 import cz.krystofcejchan.upocasi.fragments.WeatherFragment;
 
+
 /**
  * @author krystof-cejchan
  * @version 11
@@ -22,9 +23,16 @@ import cz.krystofcejchan.upocasi.fragments.WeatherFragment;
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
     BottomNavigationView bottomNavigationView;
 
+
+    HomeFragment homeFragment;
+    WeatherFragment weatherFragment = new WeatherFragment();
+    ForecastFragment forecastFragment = new ForecastFragment();
+    SettingsFragment settingsFragment = new SettingsFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        homeFragment = new HomeFragment();
         setContentView(R.layout.activity_main);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -33,14 +41,8 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         bottomNavigationView.setSelectedItemId(R.id.home);
     }
 
-    HomeFragment homeFragment = new HomeFragment();
-    WeatherFragment weatherFragment = new WeatherFragment();
-    ForecastFragment forecastFragment = new ForecastFragment();
-    SettingsFragment settingsFragment = new SettingsFragment();
-
 
     @Override
-
     public boolean
     onNavigationItemSelected(@NonNull MenuItem item) {
         final int id = item.getItemId();
